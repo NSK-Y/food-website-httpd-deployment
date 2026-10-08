@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spice Route Kitchen – Order Food Online</title>
+  <meta name="description" content="Order fresh biryani, curries, tiffins and desserts online from Spice Route Kitchen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#top">NSK<span> Kitchen</span></a>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#how">How it works</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="cart-btn" id="openCart" aria-label="Open cart">
+    🛒 Cart <span class="badge" id="cartCount">0</span>
+  </button>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Fresh. Hot. At your door in 40 minutes.</p>
+      <h1>Home-style flavours,<br>ordered in a few taps.</h1>
+      <p>Slow-cooked biryanis, fiery curries, crisp tiffins and sweet endings. Free delivery on orders above ₹500.</p>
+      <a class="btn primary" href="#menu">Order now</a>
+    </div>
+    <div class="hero-art" aria-hidden="true">🍛</div>
+  </section>
+
+  <section id="menu" class="section">
+    <h2>Our menu</h2>
+    <div class="toolbar">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <input type="search" id="search" placeholder="Search dishes…" aria-label="Search dishes">
+    </div>
+    <div class="grid" id="menuGrid"></div>
+    <p class="empty" id="emptyMsg" hidden>No dishes match your search.</p>
+  </section>
+
+  <section id="how" class="section alt">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div><span>1</span><h3>Pick your dishes</h3><p>Browse the menu and add items to your cart.</p></div>
+      <div><span>2</span><h3>Checkout</h3><p>Enter your delivery details and choose how to pay.</p></div>
+      <div><span>3</span><h3>Enjoy</h3><p>We cook fresh and deliver straight to you.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact" class="footer">
+  <div>
+    <strong>Spice Route Kitchen</strong>
+    <p>Open daily, 10:00 AM – 11:00 PM</p>
+  </div>
+  <div>
+    <p>📞 +91 98765 43210</p>
+    <p>✉️ hello@example.com</p>
+  </div>
+  <p class="copy">© <span id="year"></span> Spice Route Kitchen</p>
+</footer>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+  </div>
+  <div class="drawer-body" id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+    <div class="row"><span>GST (5%)</span><span id="tax">₹0</span></div>
+    <div class="row"><span>Delivery</span><span id="delivery">₹0</span></div>
+    <div class="row total"><span>Total</span><span id="total">₹0</span></div>
+    <button class="btn primary block" id="checkoutBtn" disabled>Proceed to checkout</button>
+    <button class="btn ghost block" id="clearCart" disabled>Clear cart</button>
+  </div>
+</aside>
+
+<!-- Checkout modal -->
+<div class="modal" id="checkoutModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+    <button class="icon-btn modal-close" id="closeCheckout" aria-label="Close">✕</button>
+    <h3 id="coTitle">Delivery details</h3>
+    <form id="checkoutForm" novalidate>
+      <label>Full name
+        <input name="name" required autocomplete="name">
+      </label>
+      <label>Phone number
+        <input name="phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile" autocomplete="tel">
+      </label>
+      <label>Delivery address
+        <textarea name="address" rows="3" required autocomplete="street-address"></textarea>
+      </label>
+      <label>Cooking notes (optional)
+        <input name="notes" placeholder="Less spicy, no onions…">
+      </label>
+      <fieldset>
+        <legend>Payment</legend>
+        <label class="radio"><input type="radio" name="pay" value="Cash on delivery" checked> Cash on delivery</label>
+        <label class="radio"><input type="radio" name="pay" value="UPI on delivery"> UPI on delivery</label>
+      </fieldset>
+      <p class="form-error" id="formError" role="alert" hidden></p>
+      <button class="btn primary block" type="submit">Place order · <span id="coTotal">₹0</span></button>
+    </form>
+  </div>
+</div>
+
+<!-- Confirmation modal -->
+<div class="modal" id="doneModal" hidden>
+  <div class="modal-card center" role="dialog" aria-modal="true">
+    <div class="tick">✓</div>
+    <h3>Order placed!</h3>
+    <p>Order ID <strong id="orderId"></strong></p>
+    <p id="doneMsg"></p>
+    <a class="btn ghost block" id="waLink" target="_blank" rel="noopener" hidden>Send order on WhatsApp</a>
+    <button class="btn primary block" id="doneClose">Back to menu</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
